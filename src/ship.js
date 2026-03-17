@@ -8,4 +8,12 @@ export class Ship {
   hit() {
     this.hitCount++;
   }
+
+  isSunk() {
+    if (this.hitCount === this.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

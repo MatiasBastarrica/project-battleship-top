@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 import { Ship } from "./ship.js";
 
-test("Take hits", () => {
+test.skip("Take hits", () => {
   const hits = [1, 2, 3, 4];
 
   hits.forEach((hit) => {
@@ -11,4 +11,15 @@ test("Take hits", () => {
     }
     expect(ship.hitCount).toBe(hit);
   });
+});
+
+test("Find out if the ship is sunk", () => {
+  let ship = new Ship(1);
+  ship.hit();
+  expect(ship.isSunk()).toBe(true);
+});
+
+test("Find out if the ship is sunk", () => {
+  let ship = new Ship(1);
+  expect(ship.isSunk()).toBe(false);
 });

@@ -61,4 +61,21 @@ class Gameboard {
       this.#missedShots.push(String(coordinate));
     }
   }
+
+  getAllSunkReport() {
+    let shipsArr = Object.values(this.ships);
+    let allSunk;
+
+    for (let i = 0; i < shipsArr.length; i++) {
+      const ship = shipsArr[i];
+      if (ship.isSunk()) {
+        allSunk = true;
+      } else {
+        allSunk = false;
+        break;
+      }
+    }
+
+    return allSunk;
+  }
 }

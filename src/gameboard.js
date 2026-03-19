@@ -5,6 +5,8 @@ class Gameboard {
     this.board = this.#getBoard();
   }
 
+  #missedShots = [];
+
   #getShips() {
     return {
       carrier: new Ship(5),
@@ -40,12 +42,23 @@ class Gameboard {
 
     if (orientation === "horizontal") {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row][col + i] = ship;
+        this.board[row][col + i].ship = ship;
       }
     } else if (orientation === "vertical") {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row + i][col] = ship;
+        this.board[row + i][col].ship = ship;
       }
+    }
+  }
+
+  receiveAttack(coordinate) {
+    let row = coordinate[0];
+    let col = coordinate[1];
+
+    if (this.board[row][col].ship) {
+      this.board[row][col].ship.hit();
+    } else {
+      this.#missedShots.push(String(coordinate));
     }
   }
 }

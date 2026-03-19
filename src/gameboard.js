@@ -33,4 +33,19 @@ class Gameboard {
     }
     return board;
   }
+
+  placeShip(startCoordinate, ship, orientation) {
+    let row = startCoordinate[0];
+    let col = startCoordinate[1];
+
+    if (orientation === "horizontal") {
+      for (let i = 0; i < ship.length; i++) {
+        this.board[row][col + i] = ship;
+      }
+    } else if (orientation === "vertical") {
+      for (let i = 0; i < ship.length; i++) {
+        this.board[row + i][col] = ship;
+      }
+    }
+  }
 }

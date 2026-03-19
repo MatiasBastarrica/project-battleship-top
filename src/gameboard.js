@@ -2,6 +2,7 @@ import { Ship } from "./ship.js";
 class Gameboard {
   constructor() {
     this.ships = this.#getShips();
+    this.board = this.#getBoard();
   }
 
   #getShips() {
@@ -17,5 +18,19 @@ class Gameboard {
       patrolBoat3: new Ship(2),
       patrolBoat4: new Ship(2),
     };
+  }
+
+  #getBoard() {
+    let board = [];
+    for (let i = 0; i < 10; i++) {
+      let row = [];
+      for (let i = 0; i < 10; i++) {
+        row.push({
+          ship: null,
+        });
+      }
+      board.push(row);
+    }
+    return board;
   }
 }

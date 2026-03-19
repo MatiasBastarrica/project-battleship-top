@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { Ship } from "./ship.js";
+import { Ship } from "../ship.js";
 
 test.skip("Take hits", () => {
   const hits = [1, 2, 3, 4];

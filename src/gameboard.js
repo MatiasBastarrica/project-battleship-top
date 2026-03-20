@@ -74,11 +74,3 @@ export class Gameboard {
     return allSunk;
   }
 }
-
-let gameboard1 = new Gameboard();
-gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "horizontal");
-gameboard1.placeShip([1, 0], gameboard1.ships.patrolBoat, "horizontal");
-gameboard1.receiveAttack([0, 0]);
-gameboard1.receiveAttack([0, 1]);
-gameboard1.receiveAttack([1, 0]);
-gameboard1.receiveAttack([1, 1]);

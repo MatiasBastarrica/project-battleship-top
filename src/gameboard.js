@@ -1,5 +1,5 @@
 import { Ship } from "./ship.js";
-class Gameboard {
+export class Gameboard {
   constructor() {
     this.ships = this.#getShips();
     this.board = this.#getBoard();
@@ -10,15 +10,10 @@ class Gameboard {
   #getShips() {
     return {
       carrier: new Ship(5),
-      battleship1: new Ship(4),
-      battleship2: new Ship(4),
+      battleship: new Ship(4),
       destroyer: new Ship(3),
-      submarine1: new Ship(3),
-      submarine2: new Ship(3),
-      patrolBoat1: new Ship(2),
-      patrolBoat2: new Ship(2),
-      patrolBoat3: new Ship(2),
-      patrolBoat4: new Ship(2),
+      submarine: new Ship(3),
+      patrolBoat: new Ship(2),
     };
   }
 
@@ -79,3 +74,11 @@ class Gameboard {
     return allSunk;
   }
 }
+
+let gameboard1 = new Gameboard();
+gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "horizontal");
+gameboard1.placeShip([1, 0], gameboard1.ships.patrolBoat, "horizontal");
+gameboard1.receiveAttack([0, 0]);
+gameboard1.receiveAttack([0, 1]);
+gameboard1.receiveAttack([1, 0]);
+gameboard1.receiveAttack([1, 1]);

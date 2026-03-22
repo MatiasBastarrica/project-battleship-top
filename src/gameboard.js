@@ -35,11 +35,21 @@ export class Gameboard {
     let row = startCoordinate[0];
     let col = startCoordinate[1];
 
+    if (9 < row < 0 || 9 < col < 0) {
+      throw new Error("The coordinate is out of bounds!");
+    }
+
     if (orientation === "x") {
+      if (col + ship.length - 1 > 9) {
+        throw new Error("You can't place the ship here!");
+      }
       for (let i = 0; i < ship.length; i++) {
         this.board[row][col + i].ship = ship;
       }
     } else if (orientation === "y") {
+      if (row + ship.length - 1 > 9) {
+        throw new Error("You can't place the ship here!");
+      }
       for (let i = 0; i < ship.length; i++) {
         this.board[row + i][col].ship = ship;
       }

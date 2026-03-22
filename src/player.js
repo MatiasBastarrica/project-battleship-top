@@ -7,7 +7,7 @@ class Player {
   }
 }
 
-class RealPlayer extends Player {
+export class RealPlayer extends Player {
   constructor(name) {
     super(name);
   }

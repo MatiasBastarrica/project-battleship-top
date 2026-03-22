@@ -12,3 +12,9 @@ class RealPlayer extends Player {
     super(name);
   }
 }
+
+class Computer extends Player {
+  constructor() {
+    super("Computer");
+  }
+}

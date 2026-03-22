@@ -1,7 +1,14 @@
 import { Gameboard } from "./gameboard.js";
 
-export class Player {
-  constructor(name = "Computer") {
+class Player {
+  constructor(name) {
+    this.name = name;
     this.gameboard = new Gameboard();
+  }
+}
+
+class RealPlayer extends Player {
+  constructor(name) {
+    super(name);
   }
 }

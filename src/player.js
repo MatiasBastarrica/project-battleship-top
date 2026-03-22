@@ -13,7 +13,7 @@ export class RealPlayer extends Player {
   }
 }
 
-class Computer extends Player {
+export class Computer extends Player {
   constructor() {
     super("Computer");
   }

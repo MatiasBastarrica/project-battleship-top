@@ -83,4 +83,72 @@ export class Gameboard {
 
     return allSunk;
   }
+
+  placeAllRandom() {
+    const shipTypes = Object.keys(this.ships);
+
+    for (let i = 0; i < shipTypes.length; i++) {
+      let ship = this.ships[shipTypes[i]];
+      let orientation = this.#getRandomNumInRange(0, 1) ? "y" : "x";
+      let row;
+      let col;
+      if (orientation === "x") {
+        let legalCoordinate;
+
+        while (!legalCoordinate) {
+          col = this.#getRandomNumInRange(0, 9 - ship.length + 1);
+          row = this.#getRandomNumInRange(0, 9);
+
+          legalCoordinate = this.#isLegal([row, col], orientation, ship.length);
+        }
+      } else if (orientation === "y") {
+        let legalCoordinate;
+
+        while (!legalCoordinate) {
+          row = this.#getRandomNumInRange(0, 9 - ship.length + 1);
+          col = this.#getRandomNumInRange(0, 9);
+
+          legalCoordinate = this.#isLegal([row, col], orientation, ship.length);
+        }
+      }
+
+      this.placeShip([row, col], ship, orientation);
+    }
+  }
+
+  #getRandomNumInRange(min, max) {
+    let random = Math.floor(Math.random() * (max - min + 1)) + min;
+    return random;
+  }
+
+  #isLegal(coordinate, orientation, shipLength) {
+    let row = coordinate[0];
+    let col = coordinate[1];
+
+    if (this.board[row][col].ship) {
+      return false;
+    } else if (orientation === "x") {
+      let allClear;
+      for (let i = 0; i < shipLength; i++) {
+        if (this.board[row][col + i].ship) {
+          allClear = false;
+          break;
+        } else {
+          allClear = true;
+        }
+      }
+      return allClear;
+    } else if (orientation === "y") {
+      let allClear;
+      for (let i = 0; i < shipLength; i++) {
+        if (this.board[row + i][col].ship) {
+          allClear = false;
+          break;
+        } else {
+          allClear = true;
+        }
+      }
+      return allClear;
+    }
+  }
 }

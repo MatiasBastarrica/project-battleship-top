@@ -62,8 +62,10 @@ export class Gameboard {
 
     if (this.board[row][col].ship) {
       this.board[row][col].ship.hit();
+      console.log("A ship has been hit!");
     } else {
       this.#missedShots.push(String(coordinate));
+      console.log("Water!");
     }
   }
 

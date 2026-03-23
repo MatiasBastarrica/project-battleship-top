@@ -35,21 +35,25 @@ export class Gameboard {
     let row = startCoordinate[0];
     let col = startCoordinate[1];
 
-    if (9 < row < 0 || 9 < col < 0) {
-      throw new Error("The coordinate is out of bounds!");
+    if (!this.#isLegal(startCoordinate, orientation, ship.length)) {
+      throw new Error("You can't place your ship there!!!");
     }
 
+    // if (9 < row < 0 || 9 < col < 0) {
+    //   throw new Error("The coordinate is out of bounds!");
+    // }
+
     if (orientation === "x") {
-      if (col + ship.length - 1 > 9) {
-        throw new Error("You can't place the ship here!");
-      }
+      // if (col + ship.length - 1 > 9) {
+      //   throw new Error("You can't place the ship here!");
+      // }
       for (let i = 0; i < ship.length; i++) {
         this.board[row][col + i].ship = ship;
       }
     } else if (orientation === "y") {
-      if (row + ship.length - 1 > 9) {
-        throw new Error("You can't place the ship here!");
-      }
+      // if (row + ship.length - 1 > 9) {
+      //   throw new Error("You can't place the ship here!");
+      // }
       for (let i = 0; i < ship.length; i++) {
         this.board[row + i][col].ship = ship;
       }
@@ -127,9 +131,14 @@ export class Gameboard {
     let row = coordinate[0];
     let col = coordinate[1];
 
-    if (this.board[row][col].ship) {
+    if (9 < row < 0 || 9 < col < 0) {
+      return false;
+    } else if (this.board[row][col].ship) {
       return false;
     } else if (orientation === "x") {
+      if (col + shipLength - 1 > 9) {
+        return false;
+      }
       let allClear;
       for (let i = 0; i < shipLength; i++) {
         if (this.board[row][col + i].ship) {
@@ -141,6 +150,9 @@ export class Gameboard {
       }
       return allClear;
     } else if (orientation === "y") {
+      if (row + shipLength - 1 > 9) {
+        throw new Error("You can't place the ship here!");
+      }
       let allClear;
       for (let i = 0; i < shipLength; i++) {
         if (this.board[row + i][col].ship) {

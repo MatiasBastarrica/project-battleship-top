@@ -9,11 +9,11 @@ export class Gameboard {
 
   #getShips() {
     return {
-      carrier: new Ship(5),
-      battleship: new Ship(4),
-      destroyer: new Ship(3),
-      submarine: new Ship(3),
-      patrolBoat: new Ship(2),
+      carrier: new Ship(5, "carrier"),
+      battleship: new Ship(4, "battleship"),
+      destroyer: new Ship(3, "destroyer"),
+      submarine: new Ship(3, "submarine"),
+      patrolBoat: new Ship(2, "patrol boat"),
     };
   }
 
@@ -62,7 +62,7 @@ export class Gameboard {
 
     if (this.board[row][col].ship) {
       this.board[row][col].ship.hit();
-      console.log("A ship has been hit!");
+      console.log(`A ${this.board[row][col].ship.type} has been hit!`);
     } else {
       this.#missedShots.push(String(coordinate));
       console.log("Water!");

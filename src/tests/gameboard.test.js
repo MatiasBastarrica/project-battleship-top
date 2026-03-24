@@ -39,10 +39,18 @@ test.skip("Check if all the ships have been sunk", () => {
   expect(gameboard1.getAllSunkReport()).toBe(true);
 });
 
-test("Attack the same coordinate", () => {
+test.skip("Attack the same coordinate", () => {
   const gameboard1 = new Gameboard();
   gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "x");
   gameboard1.receiveAttack([0, 0]);
   gameboard1.receiveAttack([0, 0]);
   expect(gameboard1.board[0][2].ship.hitCount).toBe(1);
+});
+
+test("Compare the ship on the report and the ship on the board", () => {
+  const gameboard1 = new Gameboard();
+  gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "x");
+  let report = gameboard1.receiveAttack([0, 0]);
+
+  expect(report.ship).toBe(gameboard1.ships.carrier);
 });

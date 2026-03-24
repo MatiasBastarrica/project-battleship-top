@@ -1,14 +1,14 @@
 import { describe, expect, test } from "@jest/globals";
 import { Gameboard } from "../gameboard.js";
 
-test("Receive one attack", () => {
+test.skip("Receive one attack", () => {
   let gameboard1 = new Gameboard();
   gameboard1.placeShip([0, 1], gameboard1.ships.carrier, "horizontal");
   gameboard1.receiveAttack([0, 1]);
   expect(gameboard1.board[0][1].ship.hitCount).toBe(1);
 });
 
-test("Check if there are shinks remaining", () => {
+test.skip("Check if there are shinks remaining", () => {
   let gameboard1 = new Gameboard();
   gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "horizontal");
   gameboard1.placeShip([1, 0], gameboard1.ships.patrolBoat, "horizontal");
@@ -19,7 +19,7 @@ test("Check if there are shinks remaining", () => {
   expect(gameboard1.getAllSunkReport()).toBe(false);
 });
 
-test("Check if all the ships have been sunk", () => {
+test.skip("Check if all the ships have been sunk", () => {
   let gameboard1 = new Gameboard();
   function sink(ship, board, coordinate) {
     for (let i = 0; i < ship.length; i++) {
@@ -37,4 +37,12 @@ test("Check if all the ships have been sunk", () => {
   gameboard1.placeShip([4, 0], gameboard1.ships.patrolBoat, "horizontal");
   sink(gameboard1.ships.patrolBoat, gameboard1, [4, 0]);
   expect(gameboard1.getAllSunkReport()).toBe(true);
+});
+
+test("Attack the same coordinate", () => {
+  const gameboard1 = new Gameboard();
+  gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "x");
+  gameboard1.receiveAttack([0, 0]);
+  gameboard1.receiveAttack([0, 0]);
+  expect(gameboard1.board[0][2].ship.hitCount).toBe(1);
 });

@@ -1,3 +1,32 @@
-import "./styles.css";
+// import "./styles.css";
+import { Game } from "./game.js";
+// console.log("Hello, Odinite!!!");
 
-console.log("Hello, Odinite!!!");
+const game1 = new Game("Leon");
+const player1Gameboard = game1.player1.gameboard;
+player1Gameboard.placeShip([1, 0], player1Gameboard.ships.carrier, "x");
+player1Gameboard.placeShip([0, 0], player1Gameboard.ships.patrolBoat, "x");
+player1Gameboard.placeShip([0, 5], player1Gameboard.ships.battleship, "y");
+
+// console.log(player1Gameboard.board);
+game1.playComputerTurn([1, 1]);
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+// game1.playComputerTurn([0, 1]);
+// game1.playComputerTurn([0, 0]);
+// game1.playComputerTurn();
+game1.playComputerTurn([2, 5]);
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();
+game1.playComputerTurn();

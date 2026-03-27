@@ -62,18 +62,22 @@ export class Gameboard {
         console.log(`A ${this.board[row][col].ship.type} has been hit!`);
         return {
           succesfulAttack: true,
-          shipLength: this.board[row][col].ship.lenth,
+          ship: this.board[row][col].ship,
+          previouslyAttacked: false,
         };
       } else {
         this.#missedShots.push(String(coordinate));
         console.log("Water!");
         return {
           succesfulAttack: false,
+          previouslyAttacked: false,
         };
       }
     } else {
       return {
-        succesfulAttack: false,
+        succesfulAttack: true,
+        previouslyAttacked: true,
+        ship: this.board[row][col].ship,
       };
     }
   }

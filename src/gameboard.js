@@ -51,33 +51,27 @@ export class Gameboard {
     }
   }
 
-  receiveAttack(coordinate) {
+  receiveAttack(coordinate, attacker) {
     let row = coordinate[0];
     let col = coordinate[1];
 
     if (!this.board[row][col].alreadyAttacked) {
+      console.log(`${attacker} attakcs [${row},${col}]`);
       if (this.board[row][col].ship) {
         this.board[row][col].ship.hit();
         this.board[row][col].alreadyAttacked = true;
         console.log(`A ${this.board[row][col].ship.type} has been hit!`);
         return {
-          succesfulAttack: true,
           ship: this.board[row][col].ship,
-          previouslyAttacked: false,
+          coordinate: [row, col],
         };
       } else {
         this.#missedShots.push(String(coordinate));
         console.log("Water!");
-        return {
-          succesfulAttack: false,
-          previouslyAttacked: false,
-        };
       }
     } else {
       return {
-        succesfulAttack: true,
-        previouslyAttacked: true,
-        ship: this.board[row][col].ship,
+        alreadyAttacked: true,
       };
     }
   }

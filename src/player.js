@@ -13,7 +13,7 @@ export class RealPlayer extends Player {
     super(name);
   }
 
-  playTurn(cooridnate, opponent) {
+  playTurn(opponent, cooridnate) {
     opponent.gameboard.receiveAttack(cooridnate, this.name);
   }
 }

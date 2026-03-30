@@ -9,6 +9,7 @@ export class Game {
   }
 
   over = false;
+  winner;
 
   play(coordinate, turn) {
     if (!turn && this.turn === this.player1) {
@@ -32,5 +33,6 @@ export class Game {
   gameOver(winner) {
     this.over = true;
     console.log(`${winner.name} is the winner!!!`);
+    this.winner = winner.name;
   }
 }

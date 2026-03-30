@@ -89,9 +89,6 @@ export class Computer extends Player {
                   this.#currentShip.axis,
                 );
               }
-              // this.#currentShip.axis = this.#getShipAxis(
-              //   this.#currentShip.ship.type,
-              // );
             } else {
               this.#enemyData[result.ship.type].ship = result.ship;
               this.#enemyData[result.ship.type].locations.push(

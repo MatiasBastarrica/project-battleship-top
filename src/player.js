@@ -80,14 +80,18 @@ export class Computer extends Player {
               this.#enemyData[result.ship.type].locations.push(
                 result.coordinate,
               );
+              if (result.ship.length === 2 && result.ship.sunk) {
+                this.#reset(this.#currentShip);
+              } else {
+                this.#currentShip.axis = adjacentCoordinate.axis;
+                this.#currentShip.axisCoordinates = this.#getAxisCoordinates(
+                  this.#currentShip.ship.type,
+                  this.#currentShip.axis,
+                );
+              }
               // this.#currentShip.axis = this.#getShipAxis(
               //   this.#currentShip.ship.type,
               // );
-              this.#currentShip.axis = adjacentCoordinate.axis;
-              this.#currentShip.axisCoordinates = this.#getAxisCoordinates(
-                this.#currentShip.ship.type,
-                this.#currentShip.axis,
-              );
             } else {
               this.#enemyData[result.ship.type].ship = result.ship;
               this.#enemyData[result.ship.type].locations.push(
@@ -105,6 +109,9 @@ export class Computer extends Player {
             this.playTurn(opponent);
           } else if (result.ship === this.#currentShip.ship) {
             this.#enemyData[result.ship.type].locations.push(result.coordinate);
+            if (result.ship.sunk) {
+              this.#reset(this.#currentShip);
+            }
           } else {
             this.#enemyData[result.ship.type].ship = result.ship;
             this.#enemyData[result.ship.type].locations.push(result.coordinate);
@@ -119,6 +126,9 @@ export class Computer extends Player {
             this.playTurn(opponent);
           } else if (result.ship === this.#currentShip.ship) {
             this.#enemyData[result.ship.type].locations.push(result.coordinate);
+            if (result.ship.sunk) {
+              this.#reset(this.#currentShip);
+            }
           } else {
             this.#enemyData[result.ship.type].ship = result.ship;
             this.#enemyData[result.ship.type].locations.push(result.coordinate);
@@ -154,13 +164,15 @@ export class Computer extends Player {
 
         let result = opponent.gameboard.receiveAttack([row, col], this.name);
         if (result) {
-          this.#enemyData[result.ship.type].ship = result.ship;
-          this.#enemyData[result.ship.type].locations.push(result.coordinate);
-          this.#currentShip.ship = result.ship;
-          this.#currentShip.adjacentCoordinates = this.#getAdjacentCoordinates([
-            row,
-            col,
-          ]);
+          if (result.alreadyAttacked) {
+            this.playTurn(opponent);
+          } else {
+            this.#enemyData[result.ship.type].ship = result.ship;
+            this.#enemyData[result.ship.type].locations.push(result.coordinate);
+            this.#currentShip.ship = result.ship;
+            this.#currentShip.adjacentCoordinates =
+              this.#getAdjacentCoordinates([row, col]);
+          }
         }
       }
     }

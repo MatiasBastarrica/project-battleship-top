@@ -12,7 +12,7 @@ export class Game {
 
   play(coordinate, turn) {
     if (!turn && this.turn === this.player1) {
-      this.player1.playTurn(coordinate, this.computer);
+      this.player1.playTurn(this.computer, coordinate);
       this.checkGameStatus(this.computer);
       this.turn = this.computer;
     } else {

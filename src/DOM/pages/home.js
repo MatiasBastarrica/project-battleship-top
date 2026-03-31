@@ -27,3 +27,14 @@ export function populateHome() {
   const body = document.querySelector("body");
   body.appendChild(page);
 }
+
+export function getElements() {
+  return {
+    page,
+    h1,
+    form,
+    label,
+    input,
+    startBtn,
+  };
+}

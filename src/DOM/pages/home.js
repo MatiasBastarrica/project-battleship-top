@@ -23,7 +23,7 @@ const startBtn = document.createElement("button");
 startBtn.textContent = "Start game";
 form.appendChild(startBtn);
 
-export function populate() {
+export function populateHome() {
   const body = document.querySelector("body");
   body.appendChild(page);
 }

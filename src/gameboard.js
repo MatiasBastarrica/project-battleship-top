@@ -36,17 +36,15 @@ export class Gameboard {
     let row = startCoordinate[0];
     let col = startCoordinate[1];
 
-    if (!this.#isLegal(startCoordinate, orientation, ship.length)) {
-      throw new Error("You can't place your ship there!!!");
-    }
-
-    if (orientation === "x") {
-      for (let i = 0; i < ship.length; i++) {
-        this.board[row][col + i].ship = ship;
-      }
-    } else if (orientation === "y") {
-      for (let i = 0; i < ship.length; i++) {
-        this.board[row + i][col].ship = ship;
+    if (this.#isLegal(startCoordinate, orientation, ship.length)) {
+      if (orientation === "x") {
+        for (let i = 0; i < ship.length; i++) {
+          this.board[row][col + i].ship = ship;
+        }
+      } else if (orientation === "y") {
+        for (let i = 0; i < ship.length; i++) {
+          this.board[row + i][col].ship = ship;
+        }
       }
     }
   }

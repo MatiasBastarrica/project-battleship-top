@@ -58,6 +58,9 @@ for (let i = 0; i < 10; i++) {
     col.dataset.cell = `${i},${j}`;
     addCellListeners(col);
     row.appendChild(col);
+    const indicator = document.createElement("div");
+    indicator.classList.add("indicator");
+    col.appendChild(indicator);
   }
 }
 

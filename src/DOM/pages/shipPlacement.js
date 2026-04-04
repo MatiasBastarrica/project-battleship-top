@@ -15,6 +15,8 @@ let currentShip = ships.pop();
 
 let currentGame;
 
+let finished = false;
+
 const page = document.createElement("div");
 page.classList.add("page");
 
@@ -68,13 +70,13 @@ export function populateShipPlacement(playerName, game) {
 
 function addCellListeners(cell) {
   cell.addEventListener("mouseenter", (e) => {
-    if (ships.length) {
+    if (!finished) {
       showPlacement(e.currentTarget.dataset.cell, currentShip, currentAxis);
     }
   });
 
   cell.addEventListener("mouseleave", (e) => {
-    if (ships.length) {
+    if (!finished) {
       removeHoveredStates();
     }
   });
@@ -82,16 +84,27 @@ function addCellListeners(cell) {
   cell.addEventListener("click", (e) => {
     let row = Number(e.currentTarget.dataset.cell[0]);
     let col = Number(e.currentTarget.dataset.cell[2]);
-    currentGame.player1.gameboard.placeShip(
-      [row, col],
-      currentGame.player1.gameboard.ships[currentShip.name],
-      currentAxis,
-    );
-    renderGameboard(currentGame.player1);
-    if (ships.length) {
-      currentShip = ships.pop();
-    } else {
-      // load next page
+    if (
+      isLegal(
+        `${row},${col}`,
+        currentGame.player1.gameboard.board,
+        currentAxis,
+        currentShip,
+      ) &&
+      !finished
+    ) {
+      currentGame.player1.gameboard.placeShip(
+        [row, col],
+        currentGame.player1.gameboard.ships[currentShip.name],
+        currentAxis,
+      );
+      renderGameboard(currentGame.player1);
+      if (ships.length) {
+        currentShip = ships.pop();
+      } else {
+        // load next page
+        finished = true;
+      }
     }
   });
 }

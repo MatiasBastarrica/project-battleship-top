@@ -154,7 +154,8 @@ export class Gameboard {
       return allClear;
     } else if (orientation === "y") {
       if (row + shipLength - 1 > 9) {
-        throw new Error("You can't place the ship here!");
+        // throw new Error("You can't place the ship here!");
+        return false;
       }
       let allClear;
       for (let i = 0; i < shipLength; i++) {

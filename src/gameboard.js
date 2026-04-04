@@ -66,6 +66,7 @@ export class Gameboard {
       } else {
         this.#missedShots.push(String(coordinate));
         console.log("Water!");
+        this.board[row][col].alreadyAttacked = true;
       }
     } else {
       return {

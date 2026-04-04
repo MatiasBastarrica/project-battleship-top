@@ -60,3 +60,11 @@ test("Compare the ship on the report and the ship on the board", () => {
 
   expect(report.ship).toBe(gameboard1.ships.carrier);
 });
+
+test("A missed attack is registerd as already attaked", () => {
+  const gameboard1 = new Gameboard();
+  gameboard1.placeShip([0, 0], gameboard1.ships.carrier, "x");
+  gameboard1.receiveAttack([1, 1]);
+  console.log(gameboard1.board[1][1]);
+  expect(gameboard1.board[1][1].alreadyAttacked).toBe(true);
+});

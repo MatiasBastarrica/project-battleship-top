@@ -20,6 +20,10 @@ body {
   cursor: pointer;
 }
 
+.ship-cell {
+  background-color: lightgreen;
+}
+
 .board {
   width: calc(50px * 10);
   border: 2px solid white;

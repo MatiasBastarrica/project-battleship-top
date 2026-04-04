@@ -17,7 +17,7 @@ export function clearPage() {
   }
 }
 
-export function renderGameboard(player) {
+export function renderPlacementGameboard(player) {
   for (let i = 0; i < 10; i++) {
     //row
 

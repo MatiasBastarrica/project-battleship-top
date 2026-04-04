@@ -1,5 +1,5 @@
 import { Game } from "../../game.js";
-import { renderGameboard } from "../dom.js";
+import { renderPlacementGameboard } from "../dom.js";
 
 const ships = [
   { name: "patrolBoat", length: 2 },
@@ -98,7 +98,7 @@ function addCellListeners(cell) {
         currentGame.player1.gameboard.ships[currentShip.name],
         currentAxis,
       );
-      renderGameboard(currentGame.player1);
+      renderPlacementGameboard(currentGame.player1);
       if (ships.length) {
         currentShip = ships.pop();
       } else {

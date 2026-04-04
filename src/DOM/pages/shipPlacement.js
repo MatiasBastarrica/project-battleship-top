@@ -26,9 +26,20 @@ const h2 = document.createElement("h2");
 page.appendChild(h2);
 
 const axisBtn = document.createElement("button");
+axisBtn.classList.add("axis-btn");
 axisBtn.setAttribute("type", "button");
 axisBtn.textContent = "Axis: X";
 page.appendChild(axisBtn);
+
+axisBtn.addEventListener("click", () => {
+  if (currentAxis === "x") {
+    axisBtn.textContent = "Axis: Y";
+    currentAxis = "y";
+  } else {
+    axisBtn.textContent = "Axis: X";
+    currentAxis = "x";
+  }
+});
 
 const board = document.createElement("div");
 board.classList.add("board");

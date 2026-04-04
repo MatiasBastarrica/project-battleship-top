@@ -1,5 +1,19 @@
 import { Game } from "../../game.js";
 
+const ships = [
+  { name: "patrol boat", length: 2 },
+  { name: "submarine", length: 3 },
+  { name: "destroyer", length: 3 },
+  { name: "battleship", length: 4 },
+  { name: "carrier", length: 5 },
+];
+
+let currentAxis = "x";
+
+let currentShip = ships.pop();
+
+let currentGame;
+
 const page = document.createElement("div");
 page.classList.add("page");
 
@@ -28,12 +42,102 @@ for (let i = 0; i < 10; i++) {
     const col = document.createElement("div");
     col.classList.add("cell");
     col.dataset.cell = `${i},${j}`;
+    addCellListeners(col);
     row.appendChild(col);
   }
 }
 
-export function populateShipPlacement(playerName) {
+export function populateShipPlacement(playerName, game) {
   const body = document.querySelector("body");
   body.appendChild(page);
   h2.textContent = `${playerName} place your ship`;
+  currentGame = game;
+}
+
+function addCellListeners(cell) {
+  cell.addEventListener("mouseenter", (e) => {
+    if (ships.length) {
+      showPlacement(e.currentTarget.dataset.cell, currentShip, currentAxis);
+    }
+  });
+
+  cell.addEventListener("mouseleave", (e) => {
+    removeHoveredStates();
+  });
+}
+
+function showPlacement(startCell, ship, axis) {
+  if (isLegal(startCell, currentGame.player1.gameboard.board, axis, ship)) {
+    if (axis === "x") {
+      for (let i = 0; i < ship.length; i++) {
+        let row = Number(startCell[0]);
+        let col = Number(startCell[2]) + i;
+        const cell = document.querySelector(`[data-cell = "${row},${col}"]`);
+        cell.classList.add("cell-hovered");
+      }
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        let row = Number(startCell[0]) + i;
+        let col = Number(startCell[2]);
+        const cell = document.querySelector(`[data-cell = "${row},${col}"]`);
+        cell.classList.add("cell-hovered");
+      }
+    }
+  } else {
+    const cell = document.querySelector(`[data-cell = "${startCell}"]`);
+    cell.classList.add("illegal-cell");
+  }
+}
+
+function isLegal(coord, board, axis, ship) {
+  let row = Number(coord[0]);
+  let col = Number(coord[2]);
+
+  if (9 < row < 0 || 9 < col < 0) {
+    return false;
+  } else if (board[row][col].ship) {
+    return false;
+  } else if (axis === "x") {
+    if (col + ship.length - 1 > 9) {
+      return false;
+    }
+    let allClear;
+    for (let i = 0; i < ship.length; i++) {
+      if (board[row][col + i].ship) {
+        allClear = false;
+        break;
+      } else {
+        allClear = true;
+      }
+    }
+    return allClear;
+  } else if (axis === "y") {
+    if (row + ship.length - 1 > 9) {
+      return false;
+    }
+    let allClear;
+    for (let i = 0; i < ship.length; i++) {
+      if (board[row + i][col].ship) {
+        allClear = false;
+        break;
+      } else {
+        allClear = true;
+      }
+    }
+    return allClear;
+  }
+}
+
+function removeHoveredStates() {
+  const positionsCells = document.querySelectorAll(".cell-hovered");
+
+  positionsCells.forEach((positionCell) => {
+    positionCell.classList.remove("cell-hovered");
+  });
+
+  const illegalCells = document.querySelectorAll(".illegal-cell");
+
+  illegalCells.forEach((positionCell) => {
+    positionCell.classList.remove("illegal-cell");
+  });
 }

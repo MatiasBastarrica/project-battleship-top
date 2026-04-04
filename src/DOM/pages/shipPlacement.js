@@ -1,7 +1,8 @@
 import { Game } from "../../game.js";
+import { renderGameboard } from "../dom.js";
 
 const ships = [
-  { name: "patrol boat", length: 2 },
+  { name: "patrolBoat", length: 2 },
   { name: "submarine", length: 3 },
   { name: "destroyer", length: 3 },
   { name: "battleship", length: 4 },
@@ -73,7 +74,25 @@ function addCellListeners(cell) {
   });
 
   cell.addEventListener("mouseleave", (e) => {
-    removeHoveredStates();
+    if (ships.length) {
+      removeHoveredStates();
+    }
+  });
+
+  cell.addEventListener("click", (e) => {
+    let row = Number(e.currentTarget.dataset.cell[0]);
+    let col = Number(e.currentTarget.dataset.cell[2]);
+    currentGame.player1.gameboard.placeShip(
+      [row, col],
+      currentGame.player1.gameboard.ships[currentShip.name],
+      currentAxis,
+    );
+    renderGameboard(currentGame.player1);
+    if (ships.length) {
+      currentShip = ships.pop();
+    } else {
+      // load next page
+    }
   });
 }
 

@@ -12,16 +12,17 @@ body {
   cursor: pointer;
 }
 
-.illegal-cell {
-  cursor: not-allowed;
-}
-
 .axis-btn {
   cursor: pointer;
 }
 
 .ship-cell {
   background-color: lightgreen;
+}
+
+.illegal-cell {
+  cursor: not-allowed;
+  background-color: lightcoral;
 }
 
 .board {

@@ -7,9 +7,13 @@ body {
   height: 50px;
 }
 
-.cell:hover {
+.cell-hovered {
   background-color: #f0f8ffd3;
   cursor: pointer;
+}
+
+.illegal-cell {
+  cursor: not-allowed;
 }
 
 .board {

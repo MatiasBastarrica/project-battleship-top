@@ -1,19 +1,14 @@
+/* ### GENERAL ### */
+
 body {
   background-color: rgb(32, 63, 88);
   color: gainsboro;
 }
 
-.cell {
-  width: 50px;
-  height: 50px;
-}
+/* ### UTILITY CLASSES ### */
 
 .cell-hovered {
   background-color: #f0f8ffd3;
-  cursor: pointer;
-}
-
-.axis-btn {
   cursor: pointer;
 }
 
@@ -26,9 +21,20 @@ body {
   background-color: lightcoral;
 }
 
+/* ### GAMEBOARD ### */
+
+.axis-btn {
+  cursor: pointer;
+}
+
 .board {
   width: calc(50px * 10);
   border: 2px solid white;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
 }
 
 .cell + .cell {

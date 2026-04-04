@@ -21,6 +21,14 @@ body {
   background-color: lightcoral;
 }
 
+.water-indicator {
+  --bg: white;
+}
+
+.hit-indicator {
+  --bg: red;
+}
+
 /* ### GAMEBOARD ### */
 
 .axis-btn {
@@ -35,6 +43,7 @@ body {
 .cell {
   width: 50px;
   height: 50px;
+  position: relative;
 }
 
 .cell + .cell {
@@ -47,4 +56,16 @@ body {
 
 .row {
   display: flex;
+}
+
+.indicator {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 200px;
+  background-color: var(--bg, white);
 }

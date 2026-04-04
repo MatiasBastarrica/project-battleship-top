@@ -15,6 +15,7 @@ page.appendChild(form);
 
 const label = document.createElement("label");
 label.setAttribute("for", "player-name");
+label.textContent = "Enter player name";
 form.appendChild(label);
 
 const input = document.createElement("input");
@@ -29,10 +30,12 @@ form.appendChild(startBtn);
 
 startBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  if (input.checkValidity) {
+  if (input.checkValidity()) {
     const game = new Game(input.value);
     clearPage();
     populateShipPlacement(game.player1.name, game);
+  } else {
+    input.reportValidity();
   }
 });
 
@@ -41,13 +44,13 @@ export function populateHome() {
   body.appendChild(page);
 }
 
-// export function getElements() {
-//   return {
-//     page,
-//     h1,
-//     form,
-//     label,
-//     input,
-//     startBtn,
-//   };
-// }
+export function getElements() {
+  return {
+    page,
+    h1,
+    form,
+    label,
+    input,
+    startBtn,
+  };
+}

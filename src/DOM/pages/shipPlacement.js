@@ -1,5 +1,7 @@
 import { Game } from "../../game.js";
 import { renderPlacementGameboard } from "../dom.js";
+import { clearPage } from "../dom.js";
+import { populateGamePage } from "./game-page.js";
 
 const ships = [
   { name: "patrolBoat", length: 2 },
@@ -14,8 +16,6 @@ let currentAxis = "x";
 let currentShip = ships.pop();
 
 let currentGame;
-
-let finished = false;
 
 const page = document.createElement("div");
 page.classList.add("page");
@@ -73,15 +73,11 @@ export function populateShipPlacement(playerName, game) {
 
 function addCellListeners(cell) {
   cell.addEventListener("mouseenter", (e) => {
-    if (!finished) {
-      showPlacement(e.currentTarget.dataset.cell, currentShip, currentAxis);
-    }
+    showPlacement(e.currentTarget.dataset.cell, currentShip, currentAxis);
   });
 
   cell.addEventListener("mouseleave", (e) => {
-    if (!finished) {
-      removeHoveredStates();
-    }
+    removeHoveredStates();
   });
 
   cell.addEventListener("click", (e) => {
@@ -93,8 +89,7 @@ function addCellListeners(cell) {
         currentGame.player1.gameboard.board,
         currentAxis,
         currentShip,
-      ) &&
-      !finished
+      )
     ) {
       currentGame.player1.gameboard.placeShip(
         [row, col],
@@ -105,8 +100,8 @@ function addCellListeners(cell) {
       if (ships.length) {
         currentShip = ships.pop();
       } else {
-        // load next page
-        finished = true;
+        clearPage();
+        populateGamePage(currentGame);
       }
     }
   });

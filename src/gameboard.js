@@ -168,4 +168,12 @@ export class Gameboard {
       return allClear;
     }
   }
+
+  placeFixed() {
+    this.placeShip([0, 0], this.ships.carrier, "x");
+    this.placeShip([1, 0], this.ships.battleship, "x");
+    this.placeShip([2, 0], this.ships.destroyer, "x");
+    this.placeShip([3, 0], this.ships.submarine, "x");
+    this.placeShip([4, 0], this.ships.patrolBoat, "x");
+  }
 }

@@ -7,7 +7,7 @@ h1.classList.add("title-small");
 page.appendChild(h1);
 
 const reportDisplay = document.createElement("div");
-reportDisplay.classList.add("report-dislplay");
+reportDisplay.classList.add("report-display");
 page.appendChild(reportDisplay);
 
 const boardsContainer = document.createElement("div");
@@ -86,6 +86,7 @@ export function populateGamePage(game) {
   const body = document.querySelector("body");
   body.appendChild(page);
   currentGame = game;
+  reportDisplay.textContent = `Awaiting for orders, general ${currentGame.player1.name}`;
   //place the computer's ships at random coords
   currentGame.computer.gameboard.placeFixed();
   updatePlayerBoard();
@@ -170,9 +171,17 @@ function addCellListener(cell) {
             currentGame.play();
             updatePlayerBoard();
             waitingStage = false;
-          }, 2000);
+          }, 2500);
         }
       }
     }
   });
+}
+
+export function updateReportDisplay(messagge, add = false) {
+  if (add) {
+    reportDisplay.textContent += messagge;
+  } else {
+    reportDisplay.textContent = messagge;
+  }
 }

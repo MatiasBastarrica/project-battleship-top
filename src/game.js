@@ -1,5 +1,5 @@
 import { RealPlayer, Computer } from "./player.js";
-import { getRandomNumInRange } from "./utils.js";
+import { updateReportDisplay } from "./DOM/pages/game-page.js";
 
 export class Game {
   constructor(playerName) {
@@ -33,6 +33,7 @@ export class Game {
   gameOver(winner) {
     this.over = true;
     console.log(`${winner.name} is the winner!!!`);
+    updateReportDisplay(`${winner.name} is the winner!!!`);
     this.winner = winner.name;
   }
 }

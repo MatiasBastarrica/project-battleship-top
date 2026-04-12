@@ -5,6 +5,38 @@ body {
   color: gainsboro;
 }
 
+h1,
+h2 {
+  text-align: center;
+}
+
+/* ### HOME PAGE ### */
+
+form {
+  width: 70%;
+  min-width: 300px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+label {
+  font-size: 1.35rem;
+}
+
+input {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.5rem;
+}
+
+form button {
+  padding: 1rem 1.5rem;
+  font-size: 1.235rem;
+  text-transform: uppercase;
+}
+
 /* ### UTILITY CLASSES ### */
 
 .cell-hovered {

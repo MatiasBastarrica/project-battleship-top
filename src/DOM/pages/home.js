@@ -15,7 +15,7 @@ page.appendChild(form);
 
 const label = document.createElement("label");
 label.setAttribute("for", "player-name");
-label.textContent = "Enter player name";
+label.textContent = "Enter player name:";
 form.appendChild(label);
 
 const input = document.createElement("input");

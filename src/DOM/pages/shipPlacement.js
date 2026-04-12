@@ -45,7 +45,7 @@ axisBtn.addEventListener("click", () => {
 });
 
 const board = document.createElement("div");
-board.classList.add("board");
+board.classList.add("board", "ship-placement-board");
 page.appendChild(board);
 
 for (let i = 0; i < 10; i++) {

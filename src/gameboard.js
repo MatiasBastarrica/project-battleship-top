@@ -1,4 +1,5 @@
 import { Ship } from "./ship.js";
+import { updateReportDisplay } from "./DOM/pages/game-page.js";
 export class Gameboard {
   constructor() {
     this.ships = this.#getShips();
@@ -55,10 +56,21 @@ export class Gameboard {
 
     if (!this.board[row][col].alreadyAttacked) {
       console.log(`${attacker} attakcs [${row},${col}]`);
+      updateReportDisplay(`${attacker} attacks [${row},${col}]. `);
       if (this.board[row][col].ship) {
         this.board[row][col].ship.hit();
         this.board[row][col].alreadyAttacked = true;
         console.log(`A ${this.board[row][col].ship.type} has been hit!`);
+        setTimeout(() => {
+          let shipType = this.board[row][col].ship.type;
+          let messagge;
+          if (this.board[row][col].ship.sunk) {
+            messagge = `A ${shipType} has been sunk!.`;
+          } else {
+            messagge = `A ${shipType} has been hit!.`;
+          }
+          updateReportDisplay(messagge, true);
+        }, 1000);
         return {
           ship: this.board[row][col].ship,
           coordinate: [row, col],
@@ -66,6 +78,9 @@ export class Gameboard {
       } else {
         this.#missedShots.push(String(coordinate));
         console.log("Water!");
+        setTimeout(() => {
+          updateReportDisplay(`Water!.`, true);
+        }, 1000);
         this.board[row][col].alreadyAttacked = true;
       }
     } else {

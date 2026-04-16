@@ -33,7 +33,9 @@ export class Game {
   gameOver(winner) {
     this.over = true;
     console.log(`${winner.name} is the winner!!!`);
-    updateReportDisplay(`${winner.name} is the winner!!!`);
+    setTimeout(() => {
+      updateReportDisplay(`${winner.name} is the winner!!!`);
+    }, 2500);
     this.winner = winner.name;
   }
 }

@@ -65,9 +65,17 @@ export class Gameboard {
           let shipType = this.board[row][col].ship.type;
           let messagge;
           if (this.board[row][col].ship.sunk) {
-            messagge = `A ${shipType} has been sunk!.`;
+            if (attacker === "Computer") {
+              messagge = `Your ${shipType} has been sunk!.`;
+            } else {
+              messagge = `A ${shipType} has been sunk!.`;
+            }
           } else {
-            messagge = `A ${shipType} has been hit!.`;
+            if (attacker === "Computer") {
+              messagge = `Your ${shipType} has been hit!.`;
+            } else {
+              messagge = `A ${shipType} has been hit!.`;
+            }
           }
           updateReportDisplay(messagge, true);
         }, 1000);

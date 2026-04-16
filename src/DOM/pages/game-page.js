@@ -167,11 +167,15 @@ function addCellListener(cell) {
         updateComputerBoard();
         waitingStage = true;
         if (!currentGame.over) {
-          setTimeout(() => {
-            currentGame.play();
-            updatePlayerBoard();
-            waitingStage = false;
-          }, 2500);
+          new Promise((resolve) => {
+            setTimeout(() => {
+              currentGame.play();
+              updatePlayerBoard();
+              resolve();
+            }, 2500);
+          }).then(() => {
+            setTimeout(() => (waitingStage = false), 1500);
+          });
         }
       }
     }

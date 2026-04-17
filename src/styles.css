@@ -76,6 +76,10 @@ form button {
   --bg: red;
 }
 
+.computer-cell:hover {
+  cursor: crosshair;
+}
+
 /* ### GAMEBOARD ### */
 
 .axis-btn {
